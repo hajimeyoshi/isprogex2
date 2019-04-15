@@ -33,10 +33,10 @@ int sum(int data[], int num)
   int sum = 0;
   for(i = 0; i < num; i++)
     sum += data[i];
-  if(sum > 0)
+  if(num != 0)
     return sum;
   else
-    return -1;
+    return 0;
 }
 
 /*=============================================*/
@@ -66,10 +66,21 @@ void test2()
     printf("Success: %s\n", __func__);
 }
 
+void test3()
+{
+    int data[0] = {};;
+    int num = sizeof(data) / sizeof(data[0]);
+
+    assert(sum(data, num) == 0);
+
+    print(data, num);
+    printf("Success: %s\n", __func__);
+}
 int main()
 {
     test1();
     test2();
+    test3();
 
     return 0;
 }
