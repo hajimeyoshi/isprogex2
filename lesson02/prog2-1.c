@@ -58,22 +58,24 @@ void test1()
 void test2()
 {
     int data[4] = { 10, 20, 30, 40 };;
+    int index = 3;
     int num = sizeof(data) / sizeof(data[0]);
 
-    assert(sum(data, num) == 100);
+    assert(get(data, num, index) == 40);
 
-    print(data, num);
+    printf("%d",data[index]);
     printf("Success: %s\n", __func__);
 }
 
 void test3()
 {
-    int data[0] = {};;
+  int data[4] = {10,20,30,40};;
     int num = sizeof(data) / sizeof(data[0]);
-
-    assert(sum(data, num) == 0);
+    int total;
+    assert((total = sum(data, num)) == 100);
 
     print(data, num);
+    printf("%d",total);
     printf("Success: %s\n", __func__);
 }
 int main()
