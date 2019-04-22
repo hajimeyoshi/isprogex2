@@ -28,12 +28,17 @@ void delete_rear(struct list *list);
 
 struct list *create_list()
 {
-    return NULL;
+  struct list *e = (struct list*)malloc(sizeof(struct list));
+  e->top = NULL;
+  return e;
 }
 
 struct element *create_element(int value)
 {
-    return NULL;
+  struct element *e = (struct element*)malloc(sizeof(struct element));
+  e->value = value;
+  e->next = NULL;
+  return e;
 }
 
 void print_list(struct list *list)
