@@ -106,12 +106,12 @@ void test4()
     print(data,num);
     printf("\n");
     print(data2,num);
-    /*
-    assert(get(data2, num, 0) == 10);
-    assert(get(data2, num, 1) == 20);
-    assert(get(data2, num, 2) == 30);
-    assert(get(data2, num, 3) == 40);
-    */
+    
+    assert(get(data2, num, 0) == 40);
+    assert(get(data2, num, 1) == 30);
+    assert(get(data2, num, 2) == 20);
+    assert(get(data2, num, 3) == 10);
+    
     printf("Success: %s\n", __func__);
 }
 
