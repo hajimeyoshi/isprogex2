@@ -116,25 +116,25 @@ void test1()
 
 void test2()
 {
-    struct list *list = create_list();
+  struct list *list = create_list();
     
-    struct element *e1 = create_element(10);
-    struct element *e2 = create_element(20);
-    struct element *e3 = create_element(50);
-    struct element *e4 = create_element(60);
+  struct element *e1 = create_element(10);
+  struct element *e2 = create_element(20);
+  struct element *e3 = create_element(50);
+  struct element *e4 = create_element(60);
     
-    insert_rear(list,e1);
-    insert_rear(list,e2);
-    insert_rear(list,e3);
-    insert_rear(list,e4);
+  insert_rear(list,e1);
+  insert_rear(list,e2);
+  insert_rear(list,e3);
+  insert_rear(list,e4);
     
-    assert(list->top->value == 10);
-    assert(list->top->next->value == 20);
-    assert(list->top->next->next->value == 50);
-    assert(list->top->next->next->next->value == 60);
+  assert(list->top->value == 10);
+  assert(list->top->next->value == 20);
+  assert(list->top->next->next->value == 50);
+  assert(list->top->next->next->next->value == 60);
 
-    print_list(list);
-    printf("Success: %s\n", __func__);
+  print_list(list);
+  printf("Success: %s\n", __func__);
 }
 
 void test3()
