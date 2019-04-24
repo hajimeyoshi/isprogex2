@@ -143,62 +143,62 @@ struct element *get_from_list(struct list *list, int index)
 
 void insert_at(struct list *list, int index, struct element *elem)
 {
-   int i;
-   struct element *p;
-   if(list->size > index){
-       if(index == 0){
-           elem->next = list->top;
-           list->top = elem;
-           if(elem->next == NULL){
-               list->rear = elem;
-            }
-        }else{
-            p = list->top;
-            for(i = 0; i < index-1; i++){
-                p = p->next;
-            }
-            elem->next = p->next;
-            p->next = elem;
+  int i;
+  struct element *p;
+  if(list->size > index){
+      if(index == 0){
+          elem->next = list->top;
+          list->top = elem;
+          if(elem->next == NULL){
+              list->rear = elem;
+          }
+      }else{
+        p = list->top;
+        for(i = 0; i < index-1; i++){
+          p = p->next;
         }
-        list->size = size_of_list(list);
+        elem->next = p->next;
+        p->next = elem;
+      }
+      list->size = size_of_list(list);
    }
 }
     
 void delete_at(struct list *list, int index)
 {
-   int i;
-   struct element *p;
-   if(list->size > index){
-       if(index == 0){
-           list->top = list->top->next;
-           if(list->top == NULL){
-               list->rear = NULL;
-           }
-        }else{
-            p = list->top;
-            for(i = 0; i < index-1; i++){
-                p = p->next;
-            }
-            if(p->next == list->rear){
-                list->rear = p;
-            }
-            p->next = p->next->next;
-        }
-        list->size = size_of_list(list);
-   }
+  int i;
+  struct element *p;
+  if(list->size > index){
+    if(index == 0){
+      list->top = list->top->next;
+      if(list->top == NULL){
+        list->rear = NULL;
+      }
+    }else{
+      p = list->top;
+      for(i = 0; i < index-1; i++){
+        p = p->next;
+      }
+      if(p->next == list->rear){
+        list->rear = p;
+      }
+      p->next = p->next->next;
+    }
+    list->size = size_of_list(list);
+  }
 }
     
 struct list *append(struct list *first, struct list *second)
 {  
-    if(first->top == NULL){
-        first->rear = second->rear;
-        first->top = second->top;
+  if(first->top == NULL){
+    first->rear = second->rear;
+    first->top = second->top;
     }else{
-        first->rear->next = second->top;
-        first->rear = second->rear;
+      first->rear->next = second->top;
+      first->rear = second->rear;
     }
-    first->size = size_of_list(first);
-    return first;
+  first->size = size_of_list(first);
+  return first;
 }
 
 /*=============================================*/
