@@ -299,10 +299,41 @@ void test3()
   printf("Success: %s\n", __func__);
 }
 
+void test4()
+{
+  struct element *p;
+  struct list *list = create_list();
+  int index;
+  index = 2;
+    
+  struct element *e1 = create_element(10);
+  struct element *e2 = create_element(20);
+  struct element *e3 = create_element(50);
+  struct element *e4 = create_element(60);
+    
+  insert_rear(list,e1);
+  insert_rear(list,e2);
+  insert_rear(list,e3);
+  insert_rear(list,e4);
+
+  delete_at(list,0);
+  delete_at(list,2);
+  delete_at(list,0);
+  delete_at(list,0);
+
+  assert(list->top == NULL);
+
+  print_list(list);
+  printf("top of element: %s\n",list->top);
+  printf("rear of element: %s\n",list->rear);
+  printf("Success: %s\n", __func__);
+}
+
 int main()
 {
   test1();
   test2();
   test3();
+  test4();
   return 0;
 }
