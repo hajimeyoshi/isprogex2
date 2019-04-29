@@ -78,6 +78,8 @@ void insert_front(struct list *list, struct element *elem)
   elem->next = list->top;
   if(elem->next == NULL){
       list->rear = elem;
+  }else{
+      elem->next->prev = elem;
   }
   elem->prev = NULL;
   list->top = elem;

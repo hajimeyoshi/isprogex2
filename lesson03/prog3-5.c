@@ -147,11 +147,7 @@ void insert_at(struct list *list, int index, struct element *elem)
   struct element *p;
   if(list->size > index){
       if(index == 0){
-          elem->next = list->top;
-          list->top = elem;
-          if(elem->next == NULL){
-              list->rear = elem;
-          }
+          insert_front(list,elem);
       }else{
         p = list->top;
         for(i = 0; i < index-1; i++){
@@ -170,10 +166,7 @@ void delete_at(struct list *list, int index)
   struct element *p;
   if(list->size > index){
     if(index == 0){
-      list->top = list->top->next;
-      if(list->top == NULL){
-        list->rear = NULL;
-      }
+      delete_front(list);
     }else{
       p = list->top;
       for(i = 0; i < index-1; i++){
