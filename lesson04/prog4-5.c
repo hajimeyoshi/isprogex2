@@ -19,7 +19,7 @@ struct list {
 
 struct list *create_list();
 struct element *create_element(int value);
-void print_list(struct list *list, struct element *pos);
+void print_list(struct list *list);
 
 void insert_front(struct list *list, struct element *elem);
 void insert_after(struct list *list, struct element *pos, struct element *elem);
@@ -40,7 +40,7 @@ struct element *create_element(int value)
   return e;
 }
 
-void print_list(struct list *list, struct element *pos)
+void print_list(struct list *list)
 {
   struct element *p;
   p = list->top;
@@ -55,6 +55,7 @@ void insert_front(struct list *list, struct element *elem)
   struct element *p;
   elem->next = list->top;
   list->top = elem;
+  p = list->top;
   while(p->next != list->top){
     p = p->next;
   }
@@ -63,15 +64,118 @@ void insert_front(struct list *list, struct element *elem)
 
 void insert_after(struct list *list, struct element *pos, struct element *elem)
 {
+  if(pos != NULL){
+    elem->next = pos->next;
+    pos->next = elem;
+  }else if(list->top == NULL){
+    insert_front(list,elem);
+  }
 }
 
 void delete(struct list *list, struct element *pos)
 {
+  struct element *p;
+  if(list->top != NULL){
+    if(pos != NULL){
+      p = list->top;
+      while(p->next != pos){
+	p = p->next;
+      }
+      p->next = pos->next;
+      if(pos == list->top){
+	list->top = NULL;
+      }
+    }
+  }
 }
 
 /*=============================================*/
 
+void test1()
+{
+  struct list *list = create_list();
+    
+  struct element *e1 = create_element(10);
+  struct element *e2 = create_element(20);
+  struct element *e3 = create_element(50);
+  struct element *e4 = create_element(60);
+    
+  insert_front(list,e1);
+  insert_front(list,e2);
+  insert_front(list,e3);
+  insert_front(list,e4);
+
+  assert(list->top->value == 60);
+  assert(list->top->next->value == 50);
+  assert(list->top->next->next->value == 20);
+  assert(list->top->next->next->next->value == 10);
+
+  print_list(list);
+  printf("Success: %s\n", __func__);
+}
+
+void test2()
+{
+  struct element *p;
+  struct list *list = create_list();
+  int index;
+  index = 2;
+    
+  struct element *e1 = create_element(10);
+  struct element *e2 = create_element(20);
+  struct element *e3 = create_element(50);
+  struct element *e4 = create_element(60);
+    
+  insert_front(list,e1);
+  insert_after(list,list->top,e2);
+  insert_after(list,list->top->next,e3);
+  insert_after(list,list->top->next->next,e4);
+
+
+  assert(list->top->value == 10);
+  assert(list->top->next->value == 20);
+  assert(list->top->next->next->value == 50);
+  assert(list->top->next->next->next->value == 60);
+
+  print_list(list);
+  printf("top of element: %d\n",list->top->value);
+  printf("Success: %s\n", __func__);
+}
+
+void test3()
+{
+  struct element *p;
+  struct list *list = create_list();
+  int index;
+  index = 2;
+    
+  struct element *e1 = create_element(10);
+  struct element *e2 = create_element(20);
+  struct element *e3 = create_element(50);
+  struct element *e4 = create_element(60);
+    
+  insert_front(list,e1);
+  insert_after(list,list->top,e2);
+  insert_after(list,list->top->next,e3);
+  insert_after(list,list->top->next->next,e4);
+  
+  delete(list,list->top->next);
+
+  assert(list->top->value == 10);
+  assert(list->top->next->value == 50);
+  assert(list->top->next->next->value == 60);
+
+  print_list(list);
+  printf("top of element: %d\n",list->top->value);
+  printf("Success: %s\n", __func__);
+}
+
+
 int main()
 {
-    return 0;
+  test1();
+  test2();
+  test3();
+  return 0;
 }
+
