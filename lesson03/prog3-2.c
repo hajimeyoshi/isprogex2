@@ -60,8 +60,7 @@ void insert_front(struct list *list, struct element *elem)
 void insert_rear(struct list *list, struct element *elem)
 {
   if(list->top == NULL){
-    elem->next = list->top;
-    list->top = elem;
+    insert_front(list,elem);
   }else{
     struct element *p;
     p = list->top;
