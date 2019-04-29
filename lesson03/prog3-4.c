@@ -76,6 +76,7 @@ void insert_rear(struct list *list, struct element *elem)
   }else{
     list->rear->next = elem;
     list->rear = elem;
+    elem->next = NULL;
   }
   list->size = size_of_list(list);
 }
