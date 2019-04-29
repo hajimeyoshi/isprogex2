@@ -82,7 +82,7 @@ void delete_rear(struct list *list)
 {
   if(list->top != NULL){
     if(list->top->next == NULL){
-      list->top = list->top->next;
+      delete_front(list);
     }else{
       struct element *p;
       p = list->top;
