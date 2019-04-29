@@ -44,22 +44,29 @@ void print_list(struct list *list)
 {
   struct element *p;
   p = list->top;
-  while(p != list->top){
+  do{
     printf("%d ",p->value);
     p = p->next;
-  }
+  }while(p != list->top);
 }
 
 void insert_front(struct list *list, struct element *elem)
 {
   struct element *p;
-  elem->next = list->top;
-  list->top = elem;
-  p = list->top;
-  while(p->next != list->top){
-    p = p->next;
+  if(list->top == NULL){
+    list->top = elem;
+    elem->next = elem;
+  }else{
+    p = list->top;
+    while(p->next != list->top){
+      p = p->next;
+    }
+    p->next = elem;
+    elem->next = list->top;
+    list->top = elem;
+    p = list->top;
+    
   }
-  p->next = elem;
 }
 
 void insert_after(struct list *list, struct element *pos, struct element *elem)
