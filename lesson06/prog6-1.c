@@ -21,16 +21,27 @@ int size_of_stack(struct stack *stack);
 
 struct stack *create_stack()
 {
-    return NULL;
+    struct stack *new;
+
+    new = (struct stack *)malloc(sizeof(struct stack));
+    new->top = 0;
+    return new;
 }
 
 void print_stack(struct stack *stack)
 {
+    int i;
+
+    printf("stack contain: ");
+    for(i = 0; i < stack->top; i++){
+        printf("%d ",stack->data[i]);
+    }
+    printf("\n");
 }
 
 int size_of_stack(struct stack *stack)
 {
-    return 0;
+    return stack->top;
 }
 
 /*=============================================*/
