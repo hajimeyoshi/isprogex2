@@ -22,16 +22,29 @@ int size_of_queue(struct queue *queue);
 
 struct queue *create_queue()
 {
-    return NULL;
+    struct queue *new;
+    
+    new = (struct queue *)malloc(sizeof(struct queue));
+    new->top = 0;
+    new->rear = 0;
+
+    return new;
 }
 
 void print_queue(struct queue *queue)
 {
+    int i;
+
+    printf("Queue contain: ");
+    for(i = queue->top; i < queue->rear; i++){
+        printf("%d ",queue->data[i]);
+    }
+    printf("\n");
 }
 
 int size_of_queue(struct queue *queue)
 {
-    return 0;
+    return queue->rear - queue->top;
 }
 
 /*=============================================*/
@@ -64,9 +77,37 @@ void test1()
     printf("Success: %s\n", __func__);
 }
 
+void test2()
+{
+    struct queue *queue = create_queue();
+    
+    assert(size_of_queue(queue) == 0);
+    print_queue(queue);
+
+    queue->data[0] = 50;
+    queue->rear = 1;
+    assert(queue->data[0] == 50);
+    assert(size_of_queue(queue) == 1);
+    print_queue(queue);    
+
+    queue->data[1] = 100;
+    queue->rear = 2;
+    assert(queue->data[0] == 50);
+    assert(queue->data[1] == 100);
+    assert(size_of_queue(queue) == 2);
+    print_queue(queue);
+
+    queue->top = 1;
+    assert(queue->data[1] == 100);
+    assert(size_of_queue(queue) == 1);
+    print_queue(queue);
+
+    printf("Success: %s\n", __func__);
+}
+
 int main()
 {
     test1();
-
+    test2();
     return 0;
 }
