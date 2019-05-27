@@ -31,40 +31,89 @@ int is_empty(struct queue *queue);
 
 struct queue *create_queue()
 {
-    return NULL;
+    struct queue *new;
+    
+    new = (struct queue *)malloc(sizeof(struct queue));
+    new->top = NULL;
+    new->rear = NULL;
+    new->size = 0;
+
+    return new;
 }
 
 struct element *create_element(int value)
 {
-    return NULL;
+    struct element *new;
+    
+    new = (struct element *)malloc(sizeof(struct element));
+    new->value = value;
+    new->next = NULL;
+
+    return new;
 }
 
 void print_queue(struct queue *queue)
 {
+    struct element *p;
+
+    printf("Queue contain ");
+    p = queue->top;
+    while(p != NULL){
+        printf("%d",p->value);
+        p = p->next;
+    }
+    printf("\n");
 }
 
 int size_of_queue(struct queue *queue)
 {
-    return 0;
+    struct element *p;
+    int num;
+
+    num = 0;
+    p = queue->top;
+    while(p != NULL){
+        num++;
+        p = p->next;
+    }
+    return num;
 }
 
 void enqueue(struct queue *queue, struct element *elem)
 {
+    if(queue->top == NULL){
+        queue->top = elem;
+    }else{
+        queue->rear->next = elem;
+    }
+    queue->rear = elem;
+    queue->size++;
 }
 
 struct element *dequeue(struct queue *queue)
 {
-    return NULL;
+    struct element *e;
+
+    e = queue->top;
+    if(e != NULL){
+        queue->top = queue->top->next;
+        queue->size--;
+    }
+    return e;
 }
 
 struct element *peek(struct queue *queue)
 {
-    return NULL;
+    return queue->top;
 }
 
 int is_empty(struct queue *queue)
 {
-    return 0;
+    if(queue->size == 0){
+        return 1;
+    }else{
+        return 0;
+    }
 }
 
 /*=============================================*/
