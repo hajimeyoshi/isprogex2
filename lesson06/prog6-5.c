@@ -43,8 +43,8 @@ void print_queue(struct queue *queue)
     int i;
 
     printf("Queue contain: ");
-    for(i = queue->top; i < queue->rear; i++){
-        printf("%d ",queue->data[i]);
+    for(i = 0; i < queue->num; i++){
+        printf("%d ",queue->data[(queue->top + i)% QUEUE_SIZE]);
     }
     printf("\n");
 }
@@ -57,8 +57,9 @@ int size_of_queue(struct queue *queue)
 int enqueue(struct queue *queue, int value)
 {
    if(queue->num < QUEUE_SIZE){
-        queue->data[(queue->top + queue->num) % QUEUE_SIZE] = value;
-        queue->num ++;
+        queue->data[queue->rear] = value;
+        queue->rear = (queue->rear + 1) % QUEUE_SIZE;
+        queue->num++;
         return 1;
     }else{
         return 0;
@@ -138,6 +139,7 @@ void test2()
     assert(size_of_queue(queue) == QUEUE_SIZE);
     assert(dequeue(queue) == 0);
     assert(enqueue(queue,30) == 1);
+    print_queue(queue);
 
     printf("Success: %s\n", __func__);
 }
