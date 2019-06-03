@@ -47,7 +47,18 @@ void selection_sort(struct data data[], int num)
 
 void insertion_sort(struct data data[], int num)
 {
-    /* Code copied from prog8-4.c */
+    int i,j;
+    struct data temp;
+
+    for(i = 1; i < num; i++){
+        j = i;
+        while((j > 0) && (data[j].key < data[j-1].key)){
+            temp = data[j];
+            data[j] = data[j-1];
+            data[j-1] = temp;
+            j--;
+        }
+    }
 } 
 
 int main()
