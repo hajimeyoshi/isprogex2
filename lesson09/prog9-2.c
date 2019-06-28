@@ -8,31 +8,46 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "sort-common.h"
+#define MAX 1000
 
 void merge_sort(struct data data[], int num);
-void mergesort(struct data array[],int left,int right);
+void mergesort(struct data array[], int left, int right);
 void merge_sort(struct data data[], int num)
 {
-    mergesort(data, 0,9);
+    mergesort(data, 0, 9);
 }
 
-void mergesort(struct data array[], int left, int right) {
-  int i, j, k, mid;
-  struct data work[10];  // 作業用配列
-  if (left < right) {
-    mid = (left + right)/2; // 真ん中
-    mergesort(array, left, mid);  // 左を整列
-    mergesort(array, mid+1, right);  // 右を整列
-    for (i = mid; i >= left; i--) { work[i] = array[i]; } // 左半分
-    for (j = mid+1; j <= right; j++) {
-      work[right-(j-(mid+1))] = array[j]; // 右半分を逆順
+void mergesort(struct data array[], int left, int right)
+{
+    int i, j, k, mid;
+    struct data work[MAX]; // 作業用配列
+    if (left < right)
+    {
+        mid = (left + right) / 2;         // 真ん中
+        mergesort(array, left, mid);      // 左を整列
+        mergesort(array, mid + 1, right); // 右を整列
+        for (i = mid; i >= left; i--)
+        {
+            work[i] = array[i];
+        } // 左半分
+        for (j = mid + 1; j <= right; j++)
+        {
+            work[right - (j - (mid + 1))] = array[j]; // 右半分を逆順
+        }
+        i = left;
+        j = right;
+        for (k = left; k <= right; k++)
+        {
+            if (work[i].key < work[j].key)
+            {
+                array[k] = work[i++];
+            }
+            else
+            {
+                array[k] = work[j--];
+            }
+        }
     }
-    i = left; j = right;
-    for (k = left; k <= right; k++) {
-      if (work[i].key < work[j].key) { array[k] = work[i++]; }
-      else                   { array[k] = work[j--]; }
-    }
-  }
 }
 
 /*=============================================*/
